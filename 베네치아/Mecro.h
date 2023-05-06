@@ -10,7 +10,6 @@
 #include <List>
 #include <stdio.h>
 #include <stack>
-#include <queue>
 using namespace std;
 
 #define col GetStdHandle(STD_OUTPUT_HANDLE) 

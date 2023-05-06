@@ -6,3 +6,4 @@ bo 2 1232
 qwer 1 40
 iii 1 50
 sldfkj 1 0
+bomyeong 2 250
