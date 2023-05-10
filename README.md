@@ -2,7 +2,7 @@
 자료구조(stack, queue, vector), 파일입출력, 시간 라이브러리(time.h)를 익히기 위해 제작
 - C/C++, Visual Studio
 - 콘솔로 제작한 한메타자연습의 베네치아 게임
-- 플레이 영상 :: 
+- 플레이 영상 :: https://youtu.be/U4DiBZQ0yew
 
 ## 조작법
 - **w**: 위
