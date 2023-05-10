@@ -10,4 +10,10 @@
 - **Enter**: 선택
 
 ## 게임설명
-<img src="https://user-images.githubusercontent.com/66179481/236633721-8897b0f3-af47-4a8e-b252-2085ee40908a.PNG" width="401.7" height="493.3"/> <img src="https://user-images.githubusercontent.com/66179481/236633733-f9c45aa8-58fa-48aa-b2f0-2e99608b3c02.PNG" width="401.7" height="493.3"/> <img src="https://user-images.githubusercontent.com/66179481/236633742-adb0e5c2-8e5f-4db5-9e67-35290c9d8621.PNG" width="401.7" height="493.3"/>
+### 메인메뉴  
+<img src="https://github.com/Blueraim/Nightmare/assets/66179481/4a590e3e-cb57-4680-9d21-5bf4cdfe124a" width="520" height="349"/>.  
+게임을 플레이 하거나 랭킹을 볼 수 있다.
+
+### 게임화면
+<img src="https://github.com/Blueraim/Nightmare/assets/66179481/569bd93b-9aea-457c-84d8-2423c48122d3" width="520" height="349"/>.  
+떨어지는 단어를 입력하면 점수를 얻고, 바닥에 떨어지면 목숨이 줄어든다.
