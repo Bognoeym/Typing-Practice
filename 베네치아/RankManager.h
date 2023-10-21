@@ -15,9 +15,13 @@ private:
 	vector<Rank> rankList;
 	DrawManager m_Drawer;
 public:
+	RankManager();
+	~RankManager();
 	void Management();
 	void DrawInterface();
 	void LoadRank();
 	void SortRank();
+	void QuickSort(int start, int end);
+	bool CompareRank(const Rank& a, const Rank& b);
 };
 

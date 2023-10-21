@@ -9,6 +9,8 @@
 class DrawManager
 {
 public:
+	DrawManager();
+	~DrawManager();
 	void BoxDraw(int Start_x, int Start_y, int Width, int Height);
 	void DrawPoint(string str, int x, int y);
 	void DrawMidText(string str, int x, int y);
@@ -16,17 +18,17 @@ public:
 	void TextDraw(string str, int x, int y);
 	void ErasePoint(int x, int y, int state);
 	int MenuSelectCursor(int MenuLen, int AddCol, int x, int y);
-	DrawManager();
+	
 	inline void gotoxy(int x, int y)
 	{
 		COORD Pos = { x, y };
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 	}
-	void DrawGrayBox(int Start_x, int Start_y, int Width, int Height);
+	void DrawBox(int Start_x, int Start_y, int Width, int Height);
 	void GameStartMenu();
 	void DrawStory(vector<string> storyList);
 	void DrawStage(int stage);
+	void DrawRanking();
 
 	string ReturnSize(int size);
-	~DrawManager();
 };

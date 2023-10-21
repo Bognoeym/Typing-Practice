@@ -18,6 +18,7 @@ private:
 	list<Word> wordList;
 public:
 	WordManager();
+	~WordManager();
 	inline void SetSpeed(int time)
 	{
 		if (m_iOldWordTime <= 200)

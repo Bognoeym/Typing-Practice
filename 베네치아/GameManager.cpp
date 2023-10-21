@@ -12,9 +12,9 @@ void GameManager::GameMenu()
 	int select;
 	while (1)
 	{
-		BLUEGREENGRAYBACK
+		BLUE;
 		m_Drawer.BoxDraw(0, 0, WIDTH, HEIGHT - 5);
-		ORIGINAL
+		ORIGINAL;
 		m_Drawer.GameStartMenu();
 		DrawInfo();
 		select = m_Drawer.MenuSelectCursor(3, 3, WIDTH / 2 - 5, HEIGHT * 0.4f);
@@ -41,13 +41,13 @@ void GameManager::GameMenu()
 void GameManager::GameStart()
 {
 	DrawInterface();
-	BLUEGRAYBACK
-		m_Drawer.DrawStory(storyList);
+	BLUE;
+		m_Drawer.DrawStory(m_vsStoryList);
 	system("cls");
 	DrawInterface();
-	BLUEGRAYBACK
+	BLUE;
 		InputName();
-	ORIGINAL
+	ORIGINAL;
 		m_WordManager.RandWord();
 
 	char ch;
@@ -58,19 +58,19 @@ void GameManager::GameStart()
 		system("cls");
 		DrawInterface();
 		m_Drawer.DrawStage(m_iStage);
-		BLUEGRAYBACK
+		BLUE;
 			m_Drawer.ErasePoint((WIDTH / 2) - 3, (HEIGHT - 5) / 2, 15);
 		m_iGamming = GAMMING_GAMESTART;
 		while (1)
 		{
-			BLUEGRAYBACK
+			BLUE;
 				m_Drawer.BoxDraw(WIDTH, HEIGHT * 0.6f, WIDTH * 0.3f, 5);
 			m_Drawer.DrawMidText(GetWord(PRINT), WIDTH, HEIGHT * 0.65f);
 			if (CheckLife())
 			{
-				REDGRAYBACK
+				RED;
 					m_Drawer.DrawMidText("¢Í Game Over ¢Í", WIDTH, (HEIGHT - 5) / 2);
-				ORIGINAL
+					ORIGINAL;
 					Sleep(2000);
 				SaveInfo();
 				InitInfo();
@@ -94,7 +94,7 @@ void GameManager::GameStart()
 
 			if (kbhit())
 			{
-				BLUEGRAYBACK;
+				BLUE;
 				ch = getch();
 
 				if (ch == ENTER)
@@ -114,7 +114,7 @@ void GameManager::GameStart()
 					Input(ch);
 					m_Drawer.DrawMidText(GetWord(PRINT), WIDTH, HEIGHT * 0.65f);
 				}
-				ORIGINAL
+				ORIGINAL;
 			}
 		}
 	}
@@ -124,26 +124,26 @@ void GameManager::Input(char ch)
 {
 	if (ch == BACKSPACE)
 	{
-		if (input.empty())
+		if (m_scInput.empty())
 			return;
 		else
-			input.pop();
+			m_scInput.pop();
 		m_Drawer.BoxDraw(WIDTH, HEIGHT * 0.6f, WIDTH * 0.3f, 5);
 	}
 	else
 	{
-		if (input.size() >= 20)
+		if (m_scInput.size() >= 20)
 			return;
-		input.push(ch);
+		m_scInput.push(ch);
 	}
 }
 
 string GameManager::GetWord(int type)
 {
 	string str;
-	stack<char> print, tmp = input;
+	stack<char> print, tmp = m_scInput;
 
-	if (input.empty())
+	if (m_scInput.empty())
 		return "";
 
 	while(!tmp.empty())
@@ -158,7 +158,7 @@ string GameManager::GetWord(int type)
 		print.pop();
 
 		if (type == GET)
-			input.pop();
+			m_scInput.pop();
 	}
 	
 	return str;
@@ -174,7 +174,7 @@ void GameManager::InputName()
 	{
 		if (kbhit())
 		{
-			BLUEGRAYBACK;
+			BLUE;
 			ch = getch();
 
 			if (ch == ENTER)
@@ -184,7 +184,7 @@ void GameManager::InputName()
 			}
 			Input(ch);
 			m_Drawer.DrawMidText(GetWord(PRINT), WIDTH, HEIGHT * 0.65f);
-			ORIGINAL
+			ORIGINAL;
 		}
 	}
 }
@@ -248,14 +248,14 @@ void GameManager::LoadStory()
 	while (!load.eof())
 	{
 		getline(load, str);
-		storyList.push_back(str);
+		m_vsStoryList.push_back(str);
 	}
 }
 
 void GameManager::DrawInterface()
 {
-	m_Drawer.DrawGrayBox(0, 0, WIDTH, HEIGHT);
-	BLUEGREENGRAYBACK
+	m_Drawer.DrawBox(0, 0, WIDTH, HEIGHT);
+	BLUE;
 	m_Drawer.BoxDraw(0, 0, WIDTH, HEIGHT - 5);
 	EraseInfo();
 	DrawInfo();
@@ -268,19 +268,24 @@ void GameManager::DrawInfo()
 	{
 		life += "¢¾";
 	}
-	REDGRAYBACK
+	RED;
 	m_Drawer.TextDraw("Life: " + life, 2, HEIGHT - 4);
 	m_Drawer.DrawMidText("            ", WIDTH, HEIGHT - 4);
 	m_Drawer.DrawMidText("Score: " + to_string(m_iScore), WIDTH, HEIGHT - 4);
 	m_Drawer.DrawEndText("Name: " + m_sName, WIDTH * 2, HEIGHT - 4);
-	ORIGINAL
+	ORIGINAL;
 }
 
 void GameManager::EraseInfo()
 {
-	REDGRAYBACK
+	RED;
 	m_Drawer.TextDraw("                        ", 2, HEIGHT - 4);
 	m_Drawer.DrawMidText("             ", WIDTH, HEIGHT - 4);
 	m_Drawer.DrawEndText("             ", WIDTH * 2, HEIGHT - 4);
-	ORIGINAL
+	ORIGINAL;
+}
+
+GameManager::~GameManager()
+{
+
 }

@@ -1,9 +1,9 @@
-asd 2 1419
-asd 2 1155
-asd 3 1089
-asdf 1 0
+abcd 2 1419
+efgh 2 1155
+geun 3 1089
 bo 2 1232
-qwer 1 40
 iii 1 50
-sldfkj 1 0
 bomyeong 2 250
+myeong 3 895
+sujin 1 132
+popo 4 146

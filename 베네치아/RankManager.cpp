@@ -1,5 +1,9 @@
 #include "RankManager.h"
 
+RankManager::RankManager()
+{
+
+}
 
 void RankManager::Management()
 {
@@ -8,51 +12,75 @@ void RankManager::Management()
 	DrawInterface();
 }
 
-void RankManager::SortRank()  // stage 확인 -> score
+bool RankManager::CompareRank(const Rank& a, const Rank& b)
 {
-	Rank tmp;
-
-	for (int i = 0; i < rankList.size() - 1; i++)
+	if (a.m_iStage == b.m_iStage)
+	{ 
+		return a.m_iScore >= b.m_iScore;
+	}
+	else 
 	{
-		for (int j = i + 1; j < rankList.size(); j++)
+		return a.m_iStage > b.m_iStage; 
+	}
+}
+
+void RankManager::QuickSort(int start, int end)
+{
+	if (start >= end)
+		return;
+
+	int pivot = start;
+	int i = start + 1, j = end;
+	Rank temp;
+
+	while (i <= j)
+	{
+		while (i <= end && CompareRank(rankList.at(i), rankList.at(pivot)))
 		{
-			if (rankList.at(i).m_iStage < rankList.at(j).m_iStage)
-			{
-				tmp = rankList.at(i);
-				rankList.at(i) = rankList.at(j);
-				rankList.at(j) = tmp;
-			}
-			else if (rankList.at(i).m_iStage == rankList.at(j).m_iStage)
-			{
-				if (rankList.at(i).m_iScore < rankList.at(j).m_iScore)
-				{
-					tmp = rankList.at(i);
-					rankList.at(i) = rankList.at(j);
-					rankList.at(j) = tmp;
-				}
-			}
+			i++;
+		}
+		while (j > start && !(CompareRank(rankList.at(j), rankList.at(pivot))))
+		{
+			j--;
+		}
+
+		if (i > j)
+		{
+			temp = rankList.at(j);
+			rankList.at(j) = rankList.at(pivot);
+			rankList.at(pivot) = temp;
+		}
+		else
+		{
+
+			temp = rankList.at(i);
+			rankList.at(i) = rankList.at(j);
+			rankList.at(j) = temp;
 		}
 	}
+
+	QuickSort(start, j - 1);
+	QuickSort(j + 1, end);
+}
+
+void RankManager::SortRank()  // stage 확인 -> score
+{
+	QuickSort(0, rankList.size() - 1);
+
+	//sort(rankList.begin(), rankList.end(), compare);
 }
 
 void RankManager::DrawInterface()
 {
-	string str = "==========================================";
-	int height = 3;
+	int height = 3, rankSize = rankList.size();
 	Rank tmp;
+	
+	if (rankSize > 10)
+		rankSize = 10;
 
-	m_Drawer.DrawGrayBox(0, 0, WIDTH, HEIGHT);
-	BLUEGREENGRAYBACK
-		m_Drawer.BoxDraw(0, 0, WIDTH, HEIGHT - 5);
-	BLUEGRAYBACK
-	m_Drawer.BoxDraw(WIDTH, HEIGHT * 0.05f, WIDTH * 0.3f, 5);
-	m_Drawer.DrawMidText("Ranking", WIDTH, HEIGHT * 0.05f + 2);
-	m_Drawer.DrawMidText(str + str + str, WIDTH, HEIGHT * 0.2f);
-	m_Drawer.TextDraw("Name", WIDTH*0.6f, HEIGHT * 0.2f + 2);
-	m_Drawer.TextDraw("Score", WIDTH, HEIGHT * 0.2f + 2);
-	m_Drawer.TextDraw("Stage", WIDTH*1.4f, HEIGHT * 0.2f + 2);
+	m_Drawer.DrawRanking();
 
-	for (int i = 0; i < rankList.size(); i++)
+	for (int i = 0; i < rankSize; i++)
 	{
 		tmp = rankList.at(i);
 		m_Drawer.TextDraw(tmp.m_sName, WIDTH * 0.6f, HEIGHT * 0.2f + height);
@@ -81,4 +109,9 @@ void RankManager::LoadRank()
 	}
 
 	rankList.pop_back();
+}
+
+RankManager::~RankManager()
+{
+
 }

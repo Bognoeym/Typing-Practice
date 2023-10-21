@@ -11,6 +11,7 @@ private:
 	DrawManager m_Drawer;
 public:
 	Word();
+	~Word();
 	inline string GetWord() { return m_sWord; }
 	inline void SetWord(string word) { m_sWord = word; }
 	inline void SetItemType(int item) { m_iItemType = item; }

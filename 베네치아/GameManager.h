@@ -22,13 +22,14 @@ private:
 	int m_iPopTime;
 	int m_iGamming;
 	string m_sName;
-	vector<string> storyList;
-	stack<char> input;
+	vector<string> m_vsStoryList;
+	stack<char> m_scInput;
 	DrawManager m_Drawer;
 	WordManager m_WordManager;
 	RankManager m_RankManager;
 public:
 	GameManager();
+	~GameManager();
 	inline void PlusScore() { m_iScore += 50; }
 	inline void MinusLife() { m_iLife--; }
 

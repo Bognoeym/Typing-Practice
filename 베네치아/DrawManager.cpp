@@ -58,8 +58,6 @@ void DrawManager::TextDraw(string str, int x, int y)
 	cout << str;
 }
 
-
-
 void DrawManager::BoxDraw(int Start_x, int Start_y, int Width, int Height)
 {
 	if (Start_x > Width)
@@ -92,9 +90,8 @@ void DrawManager::BoxDraw(int Start_x, int Start_y, int Width, int Height)
 		return;
 }
 
-void DrawManager::DrawGrayBox(int Start_x, int Start_y, int Width, int Height)
+void DrawManager::DrawBox(int Start_x, int Start_y, int Width, int Height)
 {
-	ORIGINALGRAYBACK
 	if (Start_x > Width)
 		Start_x -= Width;
 	for (int y = 0; y < Height; y++)
@@ -103,44 +100,43 @@ void DrawManager::DrawGrayBox(int Start_x, int Start_y, int Width, int Height)
 		for (int x = 0; x < Width; x++)
 			cout << "  ";
 	}
-	ORIGINAL
 }
 
 int DrawManager::MenuSelectCursor(int MenuLen, int AddCol, int x, int y)
 {
-	int Select = 1;
-	REDGRAYBACK
+	int select = 1;
+	RED;
 		DrawPoint("▷", x, y);
-	ORIGINALGRAYBACK
+		ORIGINAL;
 		while (1)
 		{
 			switch (getch())
 			{
 			case UP:
-				if (Select - 1 >= 1)
+				if (select - 1 >= 1)
 				{
 					ErasePoint(x, y, 2);
 					y -= AddCol;
-					Select--;
+					select--;
 				}
 				break;
 			case DOWN:
-				if (Select + 1 <= MenuLen)
+				if (select + 1 <= MenuLen)
 				{
 					ErasePoint(x, y, 2);
 					y += AddCol;
-					Select++;
+					select++;
 				}
 				break;
 			case ENTER:
-				ORIGINAL
-					return Select;
+				ORIGINAL;
+					return select;
 			}
-			REDGRAYBACK
+			RED;
 				DrawPoint("▷", x, y);
-			ORIGINALGRAYBACK
+			ORIGINAL;
 		}
-	ORIGINAL
+		ORIGINAL;
 }
 
 void DrawManager::DrawStory(vector<string> storyList)
@@ -191,20 +187,37 @@ void DrawManager::DrawStory(vector<string> storyList)
 
 void DrawManager::GameStartMenu()
 {
-	BLUEGRAYBACK
+	BLUE;
 		DrawMidText("☆ ★ 베 네 치 아 ★ ☆", WIDTH, HEIGHT * 0.2f);
 	DrawMidText("1.Game Start", WIDTH, HEIGHT * 0.4f);
 	DrawMidText("2.Rank", WIDTH, HEIGHT * 0.4f + 3);
 	DrawMidText("3.Exit", WIDTH, HEIGHT * 0.4f + 6);
-	ORIGINAL
+	ORIGINAL;
 }
 
 void DrawManager::DrawStage(int stage)
 {
-	BLUEGRAYBACK
+	BLUE;
 	DrawMidText("★ STAGE " + to_string(stage) + " ★", WIDTH, (HEIGHT - 5) / 2);
 	Sleep(1000);
-	ORIGINAL
+	ORIGINAL;
+}
+
+void DrawManager::DrawRanking()
+{
+	string str = "==========================================";
+
+	DrawBox(0, 0, WIDTH, HEIGHT);
+	BLUE;
+	BoxDraw(0, 0, WIDTH, HEIGHT - 5);
+	BLUE;
+	BoxDraw(WIDTH, HEIGHT * 0.05f, WIDTH * 0.3f, 5);
+	DrawMidText("Ranking", WIDTH, HEIGHT * 0.05f + 2);
+	DrawMidText(str + str + str, WIDTH, HEIGHT * 0.2f);
+	TextDraw("Name", WIDTH * 0.6f, HEIGHT * 0.2f + 2);
+	TextDraw("Score", WIDTH, HEIGHT * 0.2f + 2);
+	TextDraw("Stage", WIDTH * 1.4f, HEIGHT * 0.2f + 2);
+	ORIGINAL;
 }
 
 DrawManager::~DrawManager()

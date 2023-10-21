@@ -174,3 +174,8 @@ void WordManager::LoadWord()
 		defWordList.push_back(tmp);
 	}
 }
+
+WordManager::~WordManager()
+{
+
+}
